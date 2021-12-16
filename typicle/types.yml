@@ -1,11 +1,14 @@
 TYPE:
-  bool: '<?'
-  half: '<f2'
-  single: '<f4'
+  bool: &bool '<?'
+  half: &half '<f2'
+  single: &single '<f4'
   double: &double '<f8'
-  h_int: '<i2'
+  h_int: &h_int '<i2'
   int: &int '<i4'
-  d_int: '<i8'
+  d_int: &d_int '<i8'
+PHYSICS_TYPE:
+  pdg: *int
+  final: *bool
 PMU_DTYPE:
   x: *double
   y: *double
