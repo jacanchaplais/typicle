@@ -1,0 +1,19 @@
+TYPE:
+  bool: '<?'
+  half: '<f2'
+  single: '<f4'
+  double: &double '<f8'
+  h_int: '<i2'
+  int: &int '<i4'
+  d_int: '<i8'
+PMU_DTYPE:
+  x: *double
+  y: *double
+  z: *double
+  e: *double
+EDGE_DTYPE:
+  in: *int
+  out: *int
+COLOR_DTYPE:
+  color: *int
+  anticolor: *int
