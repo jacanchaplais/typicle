@@ -1,6 +1,4 @@
 from pathlib import Path
-from typing import ClassVar
-from dataclasses import dataclass, InitVar, field
 
 import yaml
 
@@ -15,23 +13,23 @@ def parse_yaml(path: str):
 def struc_type(type_dict: dict) -> list:
     return list(type_dict.items())
 
-@dataclass()
-class DataTypes:
-    config_file: str = str(THIS_DIR / 'types.yml')
-    __data: ClassVar[dict] = parse_yaml(config_file)
-    __base: ClassVar[dict] = __data['TYPE']
-    bool: str = field(init=False, default=__base['bool'])
-    half: str = field(init=False, default=__base['half'])
-    single: str = field(init=False, default=__base['single'])
-    double: str = field(init=False, default=__base['double'])
-    h_int: str = field(init=False, default=__base['h_int'])
-    int: str = field(init=False, default=__base['int'])
-    d_int: str = field(init=False, default=__base['d_int'])
-    pmu: list = field(init=False, default_factory=list)
-    edge: list = field(init=False, default_factory=list)
-    color: list = field(init=False, default_factory=list)
+class Types:
+    def __init__(self, config_file: str=str(THIS_DIR / 'types.yml')):
+        data = parse_yaml(config_file)
+        for key, val in data['TYPE'].items():
+            setattr(self, key, val)
+        self.__pmu = data['PMU_DTYPE']
+        self.__edge = data['EDGE_DTYPE']
+        self.__color = data['COLOR_DTYPE']
 
-    def __post_init__(self):
-        self.pmu = struc_type(self.__data['PMU_DTYPE'])
-        self.edge = struc_type(self.__data['EDGE_DTYPE'])
-        self.color = struc_type(self.__data['COLOR_DTYPE'])
+    @property
+    def pmu(self):
+        return struc_type(self.__pmu)
+
+    @property
+    def edge(self):
+        return struc_type(self.__edge)
+
+    @property
+    def color(self):
+        return struc_type(self.__color)
