@@ -7,7 +7,10 @@ def cast_array(in_array: np.ndarray, cast_type) -> np.ndarray:
     if in_array.dtype != cast_type:
         multi_dim = in_array.ndim > 1
         input_col_num = in_array.shape[-1]
-        target_col_num = len(cast_type.fields)
+        if cast_type.fields is None:
+            target_col_num = 1
+        else:
+            target_col_num = len(cast_type.fields)
         if multi_dim and input_col_num != target_col_num:
             raise ValueError(
                     f'Casting to {cast_type} requires in_array with '
