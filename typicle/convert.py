@@ -3,7 +3,12 @@ import numpy.typing as npt
 
 
 # TODO: add reverse from structured to unstructured
-def cast_array(in_array: np.ndarray, cast_type: npt.DTypeLike) -> np.ndarray:
+def cast_array(
+    in_array: np.ndarray,
+    cast_type: npt.DTypeLike,
+) -> np.ndarray:
+    """Returns a copy of the passed array in the desired type.
+    """
     cast_type = np.dtype(cast_type)
     if in_array.dtype == cast_type:
         cast_array = in_array
