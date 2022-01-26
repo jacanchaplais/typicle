@@ -26,6 +26,7 @@ def cast_array(
                     + f'array with shape {in_array.shape}.'
                     )
         cast_array = in_array.astype(cast_type.descr[0][1])
+        cast_array = cast_array.copy()
         cast_array = cast_array.view(dtype=cast_type, type=np.ndarray)
         cast_array = cast_array.squeeze()
     return cast_array
