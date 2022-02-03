@@ -9,6 +9,7 @@ TYPE:
 PHYSICS_TYPE:
   pdg: *int
   final: *bool
+  helicity: *h_int
 PMU_DTYPE:
   x: *double
   y: *double
